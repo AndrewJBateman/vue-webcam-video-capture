@@ -1,6 +1,6 @@
-# Vuex State Management
+# Vue Webcam Video Capture
 
-* Vue app using webcam video data streamed via api to a html interface. For chrome only.
+* Vue app using PC webcam video data streamed via api to a html interface. For chrome only.
 
 *** Note: to open web links in a new window use: _ctrl+click on link_**
 
@@ -25,11 +25,9 @@
 
 ## Technologies
 
-* [Vue framework v2.6.10](https://vuejs.org/)
+* [Vue framework v2.5.2](https://vuejs.org/)
 
-* [Vuex v3.1.0](https://github.com/vuejs/vuex) a central location from which state data is stored, modified and accessed.
-
-* [Vue CLI v3.6.0](https://github.com/vuejs/vue-cli)
+* [Vue CLI v3.1.2](https://github.com/vuejs/vue-cli)
 
 * [Vue DevTools extension for Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) was useful for debugging and seeing what was happening with the state when Vuex was used.
 
@@ -39,9 +37,20 @@ Run `npm start` for a dev server. Navigate to `http://localhost:8080/`. The app 
 
 ## Code Examples
 
-```javascript
+```html
 
-to follow
+<template>
+  <div id="app">
+    <div><video ref="video" id="video" width="640" height="480" autoplay></video></div>
+    <div><button id="snap" v-on:click="capture()">Snap Photo</button></div>
+    <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+    <ul>
+      <li v-for="c in captures" :key="c.id">
+      <img v-bind:src="c" height="50" />
+      </li>
+    </ul>
+  </div>
+</template>
 
 ```
 
