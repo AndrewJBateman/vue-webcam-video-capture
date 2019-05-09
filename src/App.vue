@@ -25,18 +25,30 @@ export default {
   },
   mounted()  {
     this.video = this.$refs.video
+    // video: ElementRef;
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.video.src = window.URL.createObjectURL(stream)
-        this.video.play()
-      });
+      navigator.mediaDevices
+        .getUserMedia(
+          { video: true }
+        )
+        .then(stream => {
+        // this.video.src = window.URL.createObjectURL(stream)
+        this.video.nativeElement.srcObject = stream;
+        this.video.nativeElement.play()
+      })
+        .catch( err => 
+          alert(`Bummer! ${err.name}.`)
+        );
     }
 	},
   methods:  {
     capture() {
-      this.canvas = this.$refs.canvas
-      var context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, 640, 480)
-      this.captures.push(canvas.toDataURL("image/png"))
+      // this.canvas = this.$refs.canvas
+      // const context = this.canvas.getContext('2d').drawImage(this.video, 0, 0, 640, 480)
+      // this.captures.push(canvas.toDataURL("image/png"))
+        const context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
+        this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+        console.log('picture taken');
     }
 	}
 }
